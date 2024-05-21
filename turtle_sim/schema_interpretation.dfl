@@ -1,0 +1,51 @@
+# Input:
+#     persistent schemas
+#         including relations discovered through graph queries
+# Output:
+#     reifiable/stet relations describing new perception/graph queries
+#     reifiable/stet relations describing messages
+#     reifiable/stet relations describing captures of training data
+
+# goal of form learn support
+
+isA(?g, PG_G), isA(?g, LearnSupport), hasParticipant(?g,?r), hasParticipant(?g,?e), isA(?r,Supporter), isA(?e,Supportee), classifies(?r,?y), classifies(?e,?x), isA(?st, Stillness), hasParticipant(?st,?x), hasParticipant(?st,?y), isA(?ct,Contact), hasParticipant(?ct,?x), hasParticipant(?ct,?y) => reifiable_supportSnapshot(?x,?y)
+
+# goal of form check support of x by y:
+
+#     relmov q: ask whether x moves relative to y
+isA(?g, PG_G), isA(?g, CheckSupport), hasParticipant(?g,?r), hasParticipant(?g,?e), isA(?r,Supporter), isA(?e,Supportee), classifies(?r,?y), classifies(?e,?x) => reifiable_relativeMovement(?x,?y)
+
+#     contact q: ask whether x contacts q
+isA(?g, PG_G), isA(?g, CheckSupport), hasParticipant(?g,?r), hasParticipant(?g,?e), isA(?r,Supporter), isA(?e,Supportee), classifies(?r,?y), classifies(?e,?x) => reifiable_contact(?x,?y)
+
+# goal of form transport x to y:
+
+#     relmov q: ask whether x moves towards y
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?t), isA(?p,Patient), isA(?t,Target), classifies(?p,?x), classifies(?t,?y) => reifiable_relativeMovement(?x,?y)
+
+#     contact q: ask what contacts x
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), isA(?p,Patient), classifies(?p,?x) => reifiable_contact(?x)
+
+#     contact q: ask what contacts that which contacts x... until connection to agent established
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?a), isA(?p,Patient), isA(?t,Transporter), classifies(?p,?x), classifies(?t,?y), noForceLink(?x,?y), isA(?f, ForceLink), hasS(?f,?x), hasO(?f,?o) => reifiable_contact(?o)
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?a), isA(?p,Patient), isA(?t,Transporter), classifies(?p,?x), classifies(?t,?y), noForceLink(?x,?y), isA(?f, ForceLink), hasS(?f,?o), hasO(?f,?x) => reifiable_contact(?o)
+
+#     relmov q: ask how enabling/threatening spatial relations evolve
+isA(?g, PG_G), enables(?s,?g), hasS(?s,?x), hasO(?s,?y) => reifiable_relativeMovement(?x,?y)
+isA(?g, PG_G), enables(?s,?g), hasS(?s,?x), hasO(?s,?y) => reifiable_contact(?x,?y)
+isA(?g, PG_G), threatens(?s,?g), hasS(?s,?x), hasO(?s,?y) => reifiable_relativeMovement(?x,?y)
+isA(?g, PG_G), threatens(?s,?g), hasS(?s,?x), hasO(?s,?y) => reifiable_contact(?x,?y)
+
+#     closeness q: ask who enables force link from transporter to transportee
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?a), isA(?t,Patient), classifies(?t,?y) => reifiable_closeness(?g,?y)
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?a), isA(?t,Patient), classifies(?t,?y) => stet_isA(?g,Transportation)
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?a), isA(?t,Patient), classifies(?t,?y) => stet_forceChainQuery(?g)
+
+#     nexp m: warn if x moves away from y
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?t), isA(?p,Patient), isA(?t,Target), classifies(?p,?x), classifies(?t,?y), isA(?s, Distancing), hasParticipant(?s,?x), hasParticipant(?s,?y) => reifiable_wrongDirection(?x,?y)
+isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?t), isA(?p,Patient), isA(?t,Target), classifies(?p,?x), classifies(?t,?y), isA(?s, Stillness), hasParticipant(?s,?x), hasParticipant(?s,?y) => reifiable_wrongDirection(?x,?y)
+
+#     thrt m: warn if a threatening move occurs
+isA(?g, PG_G), threatens(?s,?g), isA(?s,Distancing), hasParticipant(?s,?x), hasParticipant(?s,?y) => reifiable_dangerousDistancing(?x,?y)
+isA(?g, PG_G), threatens(?s,?g), isA(?s,Approaching), hasParticipant(?s,?x), hasParticipant(?s,?y) => reifiable_dangerousApproaching(?x,?y)
+isA(?g, PG_G), threatens(?s,?g), isA(?s,Stillness), hasParticipant(?s,?x), hasParticipant(?s,?y) => reifiable_dangerousStillness(?x,?y)

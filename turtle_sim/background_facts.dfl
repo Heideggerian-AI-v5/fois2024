@@ -1,0 +1,145 @@
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKAGE
+=> subclass(BLOCKAGE, CONTACT)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKED
+=> subclass(BLOCKED, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKER
+=> subclass(BLOCKER, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTACT
+=> subclass(CONTACT, Description)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINED
+=> subclass(CONTAINED, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINER
+=> subclass(CONTAINER, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINMENT
+=> subclass(CONTAINMENT, Description)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/GOAL
+=> subclass(GOAL, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/MOVEMENT
+=> subclass(MOVEMENT, Description)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/MOVER
+=> subclass(MOVER, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/PATH
+=> subclass(PATH, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SOURCE
+=> subclass(SOURCE, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SOURCE_PATH_GOAL
+=> subclass(SOURCE_PATH_GOAL, Description)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORT
+=> subclass(SUPPORT, CONTACT)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORTEE
+=> subclass(SUPPORTEE, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORTER
+=> subclass(SUPPORTER, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTATION
+=> subclass(TRANSPORTATION, Description)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTED
+=> subclass(TRANSPORTED, Role)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTER
+=> subclass(TRANSPORTER, Role)
+
+# Taxonomy of physical objects
+=> subclass(Agent, PhysicalObject)
+=> subclass(CardboardBox, PhysicalObject)
+=> subclass(Coatrack, PhysicalObject)
+=> subclass(Hextable, PhysicalObject)
+=> subclass(Pillow, PhysicalObject)
+=> subclass(PottedPlant, PhysicalObject)
+=> subclass(SmallPottedPlant, PhysicalObject)
+=> subclass(Table, PhysicalObject)
+=> subclass(TableLamp, PhysicalObject)
+=> subclass(TallChair, PhysicalObject)
+=> subclass(Trashbin, PhysicalObject)
+=> disjoint(Agent, CardboardBox)
+=> disjoint(Agent, Coatrack)
+=> disjoint(Agent, Hextable)
+=> disjoint(Agent, Pillow)
+=> disjoint(Agent, PottedPlant)
+=> disjoint(Agent, SmallPottedPlant)
+=> disjoint(Agent, Table)
+=> disjoint(Agent, TableLamp)
+=> disjoint(Agent, TallChair)
+=> disjoint(Agent, Trashbin)
+=> disjoint(CardboardBox, Coatrack)
+=> disjoint(CardboardBox, Hextable)
+=> disjoint(CardboardBox, Pillow)
+=> disjoint(CardboardBox, PottedPlant)
+=> disjoint(CardboardBox, SmallPottedPlant)
+=> disjoint(CardboardBox, Table)
+=> disjoint(CardboardBox, TableLamp)
+=> disjoint(CardboardBox, TallChair)
+=> disjoint(CardboardBox, Trashbin)
+=> disjoint(Coatrack, Hextable)
+=> disjoint(Coatrack, Pillow)
+=> disjoint(Coatrack, PottedPlant)
+=> disjoint(Coatrack, SmallPottedPlant)
+=> disjoint(Coatrack, Table)
+=> disjoint(Coatrack, TableLamp)
+=> disjoint(Coatrack, TallChair)
+=> disjoint(Coatrack, Trashbin)
+=> disjoint(Hextable, Pillow)
+=> disjoint(Hextable, PottedPlant)
+=> disjoint(Hextable, SmallPottedPlant)
+=> disjoint(Hextable, Table)
+=> disjoint(Hextable, TableLamp)
+=> disjoint(Hextable, TallChair)
+=> disjoint(Hextable, Trashbin)
+=> disjoint(Pillow, PottedPlant)
+=> disjoint(Pillow, SmallPottedPlant)
+=> disjoint(Pillow, Table)
+=> disjoint(Pillow, TableLamp)
+=> disjoint(Pillow, TallChair)
+=> disjoint(Pillow, Trashbin)
+=> disjoint(PottedPlant, SmallPottedPlant)
+=> disjoint(PottedPlant, Table)
+=> disjoint(PottedPlant, TableLamp)
+=> disjoint(PottedPlant, TallChair)
+=> disjoint(PottedPlant, Trashbin)
+=> disjoint(SmallPottedPlant, Table)
+=> disjoint(SmallPottedPlant, TableLamp)
+=> disjoint(SmallPottedPlant, TallChair)
+=> disjoint(SmallPottedPlant, Trashbin)
+=> disjoint(Table, TableLamp)
+=> disjoint(Table, TallChair)
+=> disjoint(Table, Trashbin)
+=> disjoint(TableLamp, TallChair)
+=> disjoint(TableLamp, Trashbin)
+=> disjoint(TallChair, Trashbin)
+# Individuals reuse class names
+=> subclass(CardboardBox, PhysicalObject)
+=> subclass(Coatrack, PhysicalObject)
+=> subclass(Hextable, PhysicalObject)
+=> subclass(Pillow, PhysicalObject)
+=> subclass(PottedPlant, PhysicalObject)
+=> subclass(SmallPottedPlant, PhysicalObject)
+=> subclass(Table, PhysicalObject)
+=> subclass(TableLamp, PhysicalObject)
+=> subclass(TallChair, PhysicalObject)
+=> subclass(Trashbin, PhysicalObject)

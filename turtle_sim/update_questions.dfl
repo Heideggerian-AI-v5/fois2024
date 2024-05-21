@@ -1,0 +1,41 @@
+# Input
+#     reified/stet relations for query descriptions
+# Output
+#     query specifications, each of which is a set of tuples
+#             isA(?q, Query), forQueryList(?q,?l), hasS(?q,?x), hasO(?q,?y)
+#         additionally, graph queries also get tuples
+#             hasP(?q, ?p), hasQS(?q,?qs), hasQueryType(?q,?t)
+#     message specifications, each of which is a set of tuples
+#             isA(?m, Message), forMessageList(?m,?l), hasS(?m,?x), hasO(?m,?y)
+#     note: hasS, hasO triples provided from the reification process already
+
+isA(?q, relativeMovement) => isA(?q, Query)
+isA(?q, relativeMovement) => forQueryList(?q, relativeMovements)
+
+isA(?q, contact) => isA(?q, Query)
+isA(?q, contact) => forQueryList(?q, contacts)
+
+isA(?q, closeness) => isA(?q, Query)
+isA(?q, closeness) => forQueryList(?q, closeness)
+isA(?q, closeness), hasS(?q,?s), forceChainQuery(?s)=> hasP(?q, closeQ)
+isA(?q, closeness), hasS(?q,?s) => hasQS(?q,?s)
+isA(?q, closeness), hasS(?q,?s), forceChainQuery(?s) => hasQueryType(?q, ForceChain)
+
+isA(?m,wrongDirection) => isA(?m,Message)
+isA(?m,wrongDirection) => forMessageList(?m,wrongDirections)
+
+isA(?m,dangerousApproaching) => isA(?m,Message)
+isA(?m,dangerousApproaching) => forMessageList(?m,dangerousApproaching)
+
+isA(?m,dangerousDistancing) => isA(?m,Message)
+isA(?m,dangerousDistancing) => forMessageList(?m,dangerousDistancing)
+
+isA(?m,dangerousStillness) => isA(?m,Message)
+isA(?m,dangerousStillness) => forMessageList(?m,dangerousStillness)
+
+isA(?c,supportSnapshot) => isA(?c, DataCapture)
+isA(?c,supportSnapshot) => snapshotFn(?c, _supp)
+isA(?c, supportSnapshot), hasS(?c,?s) => snapshotO(?c,?s)
+isA(?c, supportSnapshot), hasO(?c,?s) => snapshotC(?c,?s)
+isA(?c, supportSnapshot), hasS(?c,?s) => snapshotC(?c,?s)
+isA(?c, supportSnapshot), hasO(?c,?s) => snapshotO(?c,?s)

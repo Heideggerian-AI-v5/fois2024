@@ -1,0 +1,12 @@
+# Blender 4.0.2 MTL File: 'FoodPack.blend'
+# www.blender.org
+
+newmtl ImphenziaPixPal
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.141221 0.141221 0.141221
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:/ImphenziaPixel-BaseColor.png
+map_Ke C:/ImphenziaPixel-Emission.png

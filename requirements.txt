@@ -1,0 +1,14 @@
+flask
+networkx
+numpy
+opencv-python
+owlready2
+Pillow
+pybullet
+pybullet_data
+rdflib
+requests
+torch
+ultralytics
+websockets
+

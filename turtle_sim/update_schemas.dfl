@@ -1,0 +1,27 @@
+hasS(?s,?x) => hasParticipant(?s,?x)
+hasO(?s,?x) => hasParticipant(?s,?x)
+isA(?s,Distancing), isA(?t,Contact), hasS(?s,?x), hasO(?s,?y), hasS(?t,?x), hasO(?t,?y) => threatens(?s,?t)
+isA(?s,Distancing), isA(?t,Contact), hasS(?s,?x), hasO(?s,?y), hasS(?t,?y), hasO(?t,?x) => threatens(?s,?t)
+isA(?s,Contact), isA(?t,ForceLink), hasS(?s,?x), hasO(?s,?y), hasS(?t,?x), hasO(?t,?y) => enables(?s,?t)
+isA(?s,Contact), isA(?t,ForceLink), hasS(?s,?x), hasO(?s,?y), hasS(?t,?y), hasO(?t,?x) => enables(?s,?t)
+
+isA(?s,Approaching), isA(?t,Noncontact), hasS(?s,?x), hasO(?s,?y), hasS(?t,?x), hasO(?t,?y) => threatens(?s,?t)
+isA(?s,Approaching), isA(?t,Noncontact), hasS(?s,?x), hasO(?s,?y), hasS(?t,?y), hasO(?t,?x) => threatens(?s,?t)
+isA(?s,Noncontact), isA(?t,NoDirectForceBetween), hasS(?s,?x), hasO(?s,?y), hasS(?t,?x), hasO(?t,?y) => enables(?s,?t)
+isA(?s,Noncontact), isA(?t,NoDirectForceBetween), hasS(?s,?x), hasO(?s,?y), hasS(?t,?y), hasO(?t,?x) => enables(?s,?t)
+
+def_transport_nfl1: isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?a), isA(?p,Patient), isA(?t,Transporter), classifies(?p,?x), classifies(?t,?y) => noForceLink(?x,?y)
+def_transport_nfl2: isA(?g, PG_G), isA(?g, Transportation), hasParticipant(?g,?p), hasParticipant(?g,?a), isA(?p,Patient), isA(?t,Transporter), classifies(?p,?x), classifies(?t,?y) => noForceLink(?y,?x)
+
+exc_fl1: forceLink(?x,?y) => -noForceLink(?x,?y)
+exc_fl2: forceLink(?x,?y) => -noForceLink(?y,?x)
+exc_fl1 > def_transport_nfl1
+exc_fl1 > def_transport_nfl2
+exc_fl2 > def_transport_nfl1
+exc_fl2 > def_transport_nfl2
+
+isA(?f, ForceLink), hasS(?f, ?x), hasO(?f,?y) => forceLink(?x,?y)
+isA(?f, ForceLink), isA(?h, ForceLink), hasS(?f, ?x), hasO(?f,?y), hasS(?h, ?x), hasO(?h,?z) => forceLink(?y,?z)
+isA(?f, ForceLink), isA(?h, ForceLink), hasS(?f, ?x), hasO(?f,?y), hasS(?h, ?z), hasO(?h,?x) => forceLink(?y,?z)
+isA(?f, ForceLink), isA(?h, ForceLink), hasS(?f, ?x), hasO(?f,?y), hasS(?h, ?y), hasO(?h,?z) => forceLink(?x,?z)
+isA(?f, ForceLink), isA(?h, ForceLink), hasS(?f, ?x), hasO(?f,?y), hasS(?h, ?z), hasO(?h,?y) => forceLink(?x,?z)

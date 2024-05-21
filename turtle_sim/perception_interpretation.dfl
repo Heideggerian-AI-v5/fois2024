@@ -1,0 +1,32 @@
+# Predicates coming from persistent schemas:
+#     kinematic, force, functional etc. schemas
+#     goal, process, noal, threat representation
+# Predicates coming from perception:
+#         observed_contacts, -observed_contacts, observed_approaches, observed_departs, observed_stillness
+#     All arguments are PhysicalObjects, specifically names.
+# Expected "outputs" of the theory: 
+#   stet_* predicates (copied as-is but without stet_prefix)
+#   reifiable_* predicates (transformed into reified relations)
+
+# Observed contacts and movements become new spatial/kinematic schemas
+# TODO: perhaps allow some influence from persistent spat/kin schemas
+observed_contacting(?x,?y) => reifiable_Contact(?x,?y)
+-observed_contacting(?x,?y) => reifiable_Noncontact(?x,?y)
+observed_approaches(?x,?y) => reifiable_Approaching(?x,?y)
+observed_departs(?x,?y) => reifiable_Distancing(?x,?y)
+observed_stillness(?x,?y) => reifiable_Stillness(?x,?y)
+
+# Observed contacts and movements allow to infer force
+observed_contacting(?x,?y) => reifiable_ForceLink(?x,?y)
+-observed_contacting(?x,?y) => reifiable_NoDirectForceBetween(?x,?y)
+
+# Preserve process garden stuff
+isA(?x, PG_G) => isA(?x, PG)
+isA(?x, PG_P) => isA(?x, PG)
+isA(?x, PG_N) => isA(?x, PG)
+isA(?x, PG_T) => isA(?x, PG)
+isA(?x, PG), isA(?x, ?y) => stet_isA(?x,?y)
+isA(?x, PG), hasParticipant(?x,?y) => stet_hasParticipant(?x,?y)
+isA(?x, PG), hasParticipant(?x,?y), isA(?y,?z) => stet_isA(?y,?z)
+isA(?x, PG), hasParticipant(?x,?y), classifies(?y,?z) => stet_classifies(?y,?z)
+isA(?x, PG), hasParticipant(?x,?y), classifies(?y,?z), isA(?z,?w) => stet_isA(?z,?w)

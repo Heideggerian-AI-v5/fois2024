@@ -1,0 +1,19 @@
+# Inputs:
+#     Persistent schemas
+#     Graph query description, i.e. a collection of triples of form:
+#         isA(runningQuery, ?qtype)
+#         hasSource(runningQuery, ?source) 
+#         hasTarget(runningQuery, ?target)
+# Outputs:
+#     whether there is an edge from one individual to another, i.e. an assertion
+#     connQueryEdge(?x,?y) # edge ?x -> ?y
+
+hasSource(runningQuery, ?s) => isVertex(?s)
+hasTarget(runningQuery, ?t) => isVertex(?t)
+isA(runningQuery, ForceChain), isA(?x, ForceLink) => isVertex(?x)
+
+# Find a more elegant way to organize this particular rule.
+hasSource(runningQuery, ?s), hasTarget(runningQuery, ?t), hasParticipant(?s,?r), classifies(?r,?t), isVertex(?x), hasParticipant(?x,?t) => connQueryEdge(?s, ?x)
+
+isA(runningQuery, ForceChain), isVertex(?x), hasTarget(runningQuery,?y), hasParticipant(?x,?y) => connQueryEdge(?x,?y)
+isVertex(?x), isVertex(?y), hasParticipant(?x,?i), hasParticipant(?y,?i) => connQueryEdge(?x,?y)

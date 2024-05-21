@@ -1,0 +1,250 @@
+# General taxonomy related axioms
+
+subclass_transitivity:   subclass(?x,?y), subclass(?y,?z) => subclass(?x,?z)
+isA_weakening:           isA(?x,?y), subclass(?y,?z) => isA(?x,?z)
+disjoint_symmetry:       disjoint(?x,?y) => disjoint(?y,?x)
+disjoint_subclass:       subclass(?x,?y), disjoint(?y,?z) => disjoint(?x,?z)
+isA_exclusion:           isA(?x,?y), disjoint(?y,?z) => -isA(?x,?z)
+sameAs_transitivity:     sameAs(?x,?y), sameAs(?y,?z) => sameAs(?x,?z)
+sameAs_symmetry:         sameAs(?x,?y) => sameAs(?y,?x)
+isA_same:                sameAs(?x,?y), isA(?x,?z) => isA(?y,?z)
+nisA_same:               sameAs(?x,?y), -isA(?x,?z) => -isA(?y,?z)
+different_symmetry:      differentIndividuals(?x,?y) => differentIndividuals(?y,?x)
+different_vs_same:       differentIndividuals(?x,?y) => -sameAs(?x,?y)
+same_vs_different:       sameAs(?x,?y) => -differentIndividuals(?x,?y)
+ndifferent_vs_same:      -differentIndividuals(?x,?y) => sameAs(?x,?y)
+nsame_vs_different:      -sameAs(?x,?y) => differentIndividuals(?x,?y)
+disjoint_different:      isA(?x,?z), isA(?y,?w), disjoint(?z,?w) => differentIndividuals(?x,?y)
+
+# Axioms from ISL2OWL
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#contained
+contained(?x,?c) => isA(?x, CONTAINED)
+contained(?x,?c) => isA(?c, CONTAINER)
+contained(?x,?c) => PP(?x,?c)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#containedIn
+containedIn(?x,?c) => isA(?x, CONTAINED)
+containedIn(?x,?c) => isA(?c, CONTAINER)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#isTheInsideOf
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#DC
+DC(?x,?y) => DC(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC
+EC(?x,?y) => EC(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTP
+NTTP(?x,?y) => PP(?x,?y)
+NTTP(?x,?y) => NTTPi(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTPi
+NTTPi(?x,?y) => NTTP(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO
+PO(?x,?y) => PO(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP
+PP(?x,?y) => -PP(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPP
+TPP(?x,?y) => PP(?x,?y)
+TPP(?x,?y) => TPPi(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPPi
+TPPi(?x,?y) => TPP(?y,?x)
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#above
+above(?x,?y) => below(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#awayFrom
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#back
+back(?x,?y) => front(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below
+below(?x,?y) => above(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#front
+front(?x,?y) => back(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#left
+left(?x,?y) => right(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#locatedIn
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#right
+right(?x,?y) => left(?y,?x)
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#stableDistance
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#towards
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant
+hasParticipant(?s,?x) => isParticipantIn(?x,?s)
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn
+isParticipantIn(?s,?x) => hasParticipant(?x,?s)
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#blockedBy
+blockedBy(?x,?y) => EC(?x,?y)
+blockedBy(?x,?y) => blocks(?y,?x)
+blockedBy(?x,?y) => isA(?x,BLOCKED)
+blockedBy(?x,?y) => isA(?y,BLOCKER)
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#blocks
+blocks(?x,?y) => EC(?x,?y)
+blocks(?x,?y) => blockedBy(?y,?x)
+blocks(?x,?y) => isA(?x,BLOCKER)
+blocks(?x,?y) => isA(?y,BLOCKED)
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#supportedBy
+supportedBy(?x,?y) => EC(?x,?y)
+supportedBy(?x,?y) => above(?x,?y)
+supportedBy(?x,?y) => supports(?y,?x)
+supportedBy(?x,?y) => isA(?x,SUPPORTEE)
+supportedBy(?x,?y) => isA(?y,SUPPORTER)
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#supports
+supports(?x,?y) => EC(?x,?y)
+supports(?x,?y) => below(?x,?y)
+supports(?x,?y) => supportedBy(?y,?x)
+supports(?x,?y) => isA(?x,SUPPORTER)
+supports(?x,?y) => isA(?y,SUPPORTEE)
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/beingCrossedBy
+beingCrossedBy(?x,?y) => crossing(?y,?x)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#boundedBy
+boundedBy(?x,?y) => bounds(?y,?x)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#bounds
+bounds(?x,?y) => boundedBy(?y,?x)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#crossing
+crossing(?x,?y) => beingCrossedBy(?y,?x)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#goingThrough
+goingThrough(?x,?y) => crossing(?x,?y)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_IN.owl#goingIn
+goingIn_means_awayFrom:      goingIn(?x,?y) => awayFrom(?x,?y)
+goingIn_means_outOf:         goingIn(?x,?y) => outOf(?x,?y)
+goingIn(?x,?y) => isA(?y,CONTAINER)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_OUT.owl#goingOut
+goingOut_means_containedIn:  goingOut(?x,?y) => containedIn(?x,?y)
+goingOut(?x,?y) => isA(?y,CONTAINER)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_FROM.owl#onPathFrom
+onPathFrom_means_awayFrom:   onPathFrom(?x,?y) => awayFrom(?x,?y)
+onPathFrom_means_outOf:      onPathFrom(?x,?y) => outOf(?x,?y)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD.owl#onPathToward
+onPathToward_means_awayFrom: onPathToward(?x,?y) => awayFrom(?x,?y)
+onPathToward_means_outOf:    onPathToward(?x,?y) => outOf(?x,?y)
+onPathToward(?x,?y) => towards(?x,?y)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF#outOf
+outOf(?x,?y) => DC(?x,?y)
+DC(?x,?y), isTheInsideOf(?y,?z) => outOf(?x,?z)
+EC(?x,?y), isTheInsideOf(?y,?z) => outOf(?x,?z)
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#isTheOutsideOf
+isTheOutsideOf(?x,?y) => -isTheOutsideOf(?y,?x)
+isTheOutsideOf(?x,?y) => differentIndividuals(?x,?y)
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKAGE
+hasParticipant(?s,?x), hasParticipant(?s,?y), isA(?x,BLOCKED), isA(?y,BLOCKER) => isA(?s,BLOCKAGE)
+# Reverse direction -- a blockage is something with blocker and blocked participants -- cannot be expressed
+# Taxonomy axiom -- blockage is contact -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKED
+# Taxonomy axiom -- blocked is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/BLOCKER
+# Taxonomy axiom -- blocker is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTACT
+# Did not translate definition axiom from ISL2OWL because it does not seem appropriate to
+# classify as contact all descriptions with participants that have EC relations.
+# Taxonomy axiom -- CONTACT is Description -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINED
+# Taxonomy axiom -- contained is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINER
+# Taxonomy axiom -- container is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/CONTAINMENT
+hasParticipant(?s,?x), hasParticipant(?s,?y), isA(?x,CONTAINED),isA(?y,CONTAINER) => isA(?s,CONTAINMENT)
+# Reverse direction -- a containment is something with container and contained participants -- cannot be expressed
+# Taxonomy axiom -- containment is description -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/GOAL
+# Taxonomy axiom -- goal is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/MOVEMENT
+hasParticipant(?s,?x), isA(?x,MOVER), => isA(?s,MOVEMENT)
+# Reverse direction -- a movement is something with a mover participant -- cannot be expressed
+# Taxonomy axiom -- movement is description -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/MOVER
+# Taxonomy axiom -- mover is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/PATH
+# Taxonomy axiom -- path is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SOURCE
+# Taxonomy axiom -- source is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SOURCE_PATH_GOAL
+hasParticipant(?s,?x), hasParticipant(?s,?y), hasParticipant(?s,?z), isA(?x,SOURCE), isA(?y,PATH), isA(?z,GOAL) => isA(?s,SOURCE_PATH_GOAL)
+# Reverse direction -- an spg is something with source, path, goal participants -- cannot be expressed
+# Taxonomy axiom -- source_path_goal is description -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORT
+hasParticipant(?s,?x), hasParticipant(?s,?y), isA(?x,SUPPORTER), isA(?y,SUPPORTEE) => isA(?s,SUPPORT)
+# Reverse direction -- a support is something with supporter and supportee participants -- cannot be expressed
+# Taxonomy axiom -- support is contact -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORTEE
+# Taxonomy axiom -- supportee is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/SUPPORTER
+# Taxonomy axiom -- supporter is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTATION
+hasParticipant(?s,?x), hasParticipant(?s,?y), isA(?x,TRANSPORTER), isA(?y,TRANSPORTED) => isA(?s,TRANSPORTATION)
+# Reverse direction -- a transportation is something with transporter and transported participants -- cannot be expressed
+# Taxonomy axiom -- transportation is description -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTED
+isA(?x,CONTAINED), isA(?x,MOVER) => isA(?x,TRANSPORTED)
+isA(?x,SUPPORTED), isA(?x,MOVER) => isA(?x,TRANSPORTED)
+isA(?x,TRANSPORTED) => isA(?x,MOVER)
+# Cannot express the reverse direction fully, as a disjunction -- contained or supported -- cannot appear on rhs
+# Taxonomy axiom -- transported is role -- in backgroundfacts.dfl
+
+###  http://www.semanticweb.org/stefanodegiorgis/ontologies/2023/11/isl_test.owl/TRANSPORTER
+isA(?x,CONTAINER), isA(?x,MOVER) => isA(?x,TRANSPORTER)
+isA(?x,SUPPORTER), isA(?x,MOVER) => isA(?x,TRANSPORTER)
+isA(?x,TRANSPORTER) => isA(?x,MOVER)
+# Cannot express the reverse direction fully, as a disjunction -- container or supporter -- cannot appear on rhs
+# Taxonomy axiom -- transporter is role -- in backgroundfacts.dfl

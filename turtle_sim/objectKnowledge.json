@@ -1,0 +1,212 @@
+[
+       {
+              "type": "Ball",
+              "simtype": "ktree",
+              "filename": "3DObjects/ball/ball.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "BeerMug",
+              "simtype": "ktree",
+              "filename": "3DObjects/beermug/beermug.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Box",
+              "simtype": "ktree",
+              "filename": "3DObjects/box/box.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "CardboardBox",
+              "simtype": "ktree",
+              "filename": "3DObjects/cardboard_box/cardboard_box.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "CarpetSquare",
+              "simtype": "ktree",
+              "filename": "3DObjects/carpet_square/carpet_square.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Coatrack",
+              "simtype": "ktree",
+              "filename": "3DObjects/coatrack/coatrack.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "GrillFork",
+              "simtype": "ktree",
+              "filename": "3DObjects/grillfork/grillfork.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Hextable",
+              "simtype": "ktree",
+              "filename": "3DObjects/hextable/hextable.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Hook",
+              "simtype": "ktree",
+              "filename": "3DObjects/hook/hook.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Pillow",
+              "simtype": "ktree",
+              "filename": "3DObjects/pillow/pillow.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Plane",
+              "simtype": "ktree",
+              "filename": "3DObjects/Floor/floor.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "PottedPlant",
+              "simtype": "ktree",
+              "filename": "3DObjects/potted_plant/potted_plant.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "SmallPottedPlant",
+              "simtype": "ktree",
+              "filename": "3DObjects/small_potted_plant/small_potted_plant.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Table",
+              "simtype": "ktree",
+              "filename": "3DObjects/table/table.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "TableLamp",
+              "simtype": "ktree",
+              "filename": "3DObjects/tablelamp/tablelamp.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "TallChair",
+              "simtype": "ktree",
+              "filename": "3DObjects/tall_chair/tall_chair.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "TallWall",
+              "simtype": "ktree",
+              "filename": "3DObjects/tall_wall/tall_wall.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Tongs",
+              "simtype": "ktree",
+              "filename": "3DObjects/tongs/tongs.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "Trashbin",
+              "simtype": "ktree",
+              "filename": "3DObjects/trashbin/trashbin.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "TurtleBot",
+              "simtype": "ktree",
+              "filename": "3DObjects/turtlebot/turtlebot.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       },
+       {
+              "type": "WideDoorway",
+              "simtype": "ktree",
+              "filename": "3DObjects/wide_doorway/wide_doorway.urdf",
+              "fn": {},
+              "customStateVariables": {
+                     "left": 0,
+                     "right": 0
+              }
+       }
+]

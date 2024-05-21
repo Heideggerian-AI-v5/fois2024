@@ -1,0 +1,12 @@
+# Blender MTL File: 'toprocess3d.blend'
+# Material Count: 1
+
+newmtl woodDark.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.429225 0.290358 0.191849
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

@@ -1,0 +1,10 @@
+# Input:
+#     persistent schemas
+#     results from graph queries
+# Output:
+#     convert query results to relations between schemas
+#     transitive closure/prop chain where appropriate
+
+closeQ(?s,?x), isA(?x,ForceLink) => enables(?x,?s)
+enables(?x,?y), enables(?y,?z) => enables(?x,?z)
+threatens(?x,?y), enables(?y,?z) => threatens(?x,?z)

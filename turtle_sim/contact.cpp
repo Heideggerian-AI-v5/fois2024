@@ -1,9 +1,24 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#if defined(_MSC_VER)
+    //  Microsoft 
+    #define EXPORT __declspec(dllexport)
+    #define IMPORT __declspec(dllimport)
+#elif defined(__GNUC__)
+    //  GCC
+    #define EXPORT __attribute__((visibility("default")))
+    #define IMPORT
+#else
+    //  do nothing and hope for the best?
+    #define EXPORT
+    #define IMPORT
+    #pragma warning Unknown dynamic link import/export semantics.
+#endif
+
 extern "C"
 {
-    __declspec(dllexport) void contact(int, float, int, int, uint8_t **, uint8_t **, uint8_t **, uint8_t **, float **, uint8_t **, uint8_t **);
+    EXPORT void contact(int, float, int, int, uint8_t **, uint8_t **, uint8_t **, uint8_t **, float **, uint8_t **, uint8_t **);
 }
 
 uint8_t close(float a, float b, float threshold)
@@ -84,3 +99,4 @@ void contact(int searchWidth, float threshold, int rows, int cols, uint8_t **dil
     contactDM(searchWidth, threshold, rows, cols, dilS, maskO, maskS, depthImg, contPO);
     contactDM(searchWidth, threshold, rows, cols, dilO, maskS, maskO, depthImg, contPS);
 }
+

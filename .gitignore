@@ -1,4 +1,5 @@
 data/
+turtle_sim/yolov8s-seg.pt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

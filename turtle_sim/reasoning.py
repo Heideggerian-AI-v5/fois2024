@@ -9,7 +9,7 @@ from dbgvis import startVisualizationThread, stopVisualizationThread, debugDataL
 from objectrecognition import startReceptionThread, stopReceptionThread, startRecognitionThread, stopRecognitionThread
 from perception import perceptionQueries, perceptionQuestionsLock, perceptionResults, perceptionResultsLock, perceptionReady, startPerceptionThread, stopPerceptionThread
 from utils import makeStartStopFns
-from constants import perceptionInterpretationTheoryFile, updateSchemasTheoryFile, connQueryTheoryFile, closureTheoryFile,  schemaInterpretationTheoryFile, updateQuestionsTheoryFile, backgroundFactsFile, transportSmallPottedPlantFile
+from constants import rawImgDataFolder, perceptionInterpretationTheoryFile, updateSchemasTheoryFile, connQueryTheoryFile, closureTheoryFile,  schemaInterpretationTheoryFile, updateQuestionsTheoryFile, backgroundFactsFile, transportSmallPottedPlantFile
 
 reasoningGVar= {}
 
@@ -220,7 +220,9 @@ def reasoning(dbg=False, persistentSchemas=None):
       new persistent schemas (dfl facts) + theory -> reifiable questions, stet relations (triples)
       reifiable questions/stet relations + theory -> new questions (tuples)
     '''
-    storeAt=persistentSchemas["storeAt"].getTriples()[0][1]
+    storeAt = rawImgDataFolder
+    if "storeAt" in persistentSchemas:
+        storeAt=persistentSchemas["storeAt"].getTriples()[0][1]
     perceptionQueriesLocal = {"relativeMovements": [], "contacts": [], "closeness": [], "unavoidables": []}
     perceptionResultsLocal = {"relativeMovements": [], "contacts": []}
     perceptionInterpretationTheory = silkie.loadDFLRules(perceptionInterpretationTheoryFile)

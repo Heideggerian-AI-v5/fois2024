@@ -21,17 +21,13 @@ For more detailed instructions on how to install pybullet on Windows, see:
 
 Once all dependencies are installed, you can try building our contact.cpp file into a shared library. Assuming the cmake command is available on your system, it is enough to change to the turtle_sim folder of the repository and perform the following sequence of commands:
 
-`
+```
     mkdir build  
-    
     cd build  
-    
     cmake ..  
-    
     cmake --build .  
-    
     cp libcontact.* ..  
-`
+```
 
 Note that we included two built binaries: libcontact.so (for Unix), libcontact.dll (for Windows) so you can also try to skip the make step.
 

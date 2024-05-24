@@ -1,8 +1,10 @@
 flask
+inflection
 networkx
 numpy
 opencv-python
 owlready2
+pathlib
 Pillow
 pybullet
 rdflib

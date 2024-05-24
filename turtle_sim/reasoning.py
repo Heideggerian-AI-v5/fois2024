@@ -177,9 +177,7 @@ def displayMessages(messages):
         print("=======")
     return
 
-labelMap = {"CardboardBox": 0, "Coatrack": 1, "Hextable": 2, "Pillow": 3, "PottedPlant": 4, "SmallPottedPlant": 5, "Table": 6, "TableLamp": 7, "TallChair": 8, "Trashbin": 9, "Hook": 10, "Tongs": 11, "BeerMug": 12, "Hook_supp": 13, "Tongs_supp": 14, "BeerMug_supp": 15}
-
-def storeTrainingFrames(captures, image, contactMasks):
+def storeTrainingFrames(captures, image, contactMasks, storeAt):
     def _haveSomething(captures, contactMasks):
         return any([((c,o,o) in contactMasks) or ((o,c,o) in contactMasks) for _,o,c in captures["participants"]])
     def _objPolygons(label,img,outfile):
@@ -195,11 +193,10 @@ def storeTrainingFrames(captures, image, contactMasks):
                 _ = outfile.write("%s %s\n" % (label, pstr))
     if not _haveSomething(captures, contactMasks):
         return
-    fnamePrefix = "seg_%s" % time.asctime().replace(" ", "_").replace(":","_")
+    fnamePrefix = os.path.join(storeAt, "seg_%s" % time.asctime().replace(" ", "_").replace(":","_"))
     image.save(fnamePrefix + ".jpg")
     with open(fnamePrefix + ".txt", "w") as outfile:
         for fn, o, c in captures["participants"]:
-            # TODO: create labelMap on the fly to enable concept invention
             label = o+fn
             mask = contactMasks.get((o,c,o))
             if mask is None:
@@ -223,6 +220,7 @@ def reasoning(dbg=False, persistentSchemas=None):
       new persistent schemas (dfl facts) + theory -> reifiable questions, stet relations (triples)
       reifiable questions/stet relations + theory -> new questions (tuples)
     '''
+    storeAt=persistentSchemas["storeAt"].getTriples()[0][1]
     perceptionQueriesLocal = {"relativeMovements": [], "contacts": [], "closeness": [], "unavoidables": []}
     perceptionResultsLocal = {"relativeMovements": [], "contacts": []}
     perceptionInterpretationTheory = silkie.loadDFLRules(perceptionInterpretationTheoryFile)
@@ -287,7 +285,7 @@ def reasoning(dbg=False, persistentSchemas=None):
         perceptionQueriesLocal, messages, captures = makePerceptionQueries(conclusions)
         #print(perceptionQueriesLocal, messages)
         displayMessages(messages)
-        storeTrainingFrames(captures, image, contactMasks)
+        storeTrainingFrames(captures, image, contactMasks, storeAt)
         perceptionQuestionsLock.acquire()
         for k,v in perceptionQueriesLocal.items():
             perceptionQueries[k] = v

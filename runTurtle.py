@@ -22,7 +22,6 @@ from flask import Flask, request
 
 import turtle_sim.world as world
 
-import turtle_sim.polygonmagic as polygonmagic
 from turtle_sim.commands import commandFns
 
 from turtle_sim.commands import serverGetImage
@@ -102,7 +101,6 @@ def segmentationSnapshot(w, agentName):
                 contours, hierarchy = cv.findContours(image=v, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_TC89_KCOS)
                 #contours, hierarchy = cv.findContours(image=v, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_SIMPLE)
                 #contours, hierarchy = cv.findContours(image=v, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_NONE)
-                #polygon = polygonmagic.holey2polygon(contours, hierarchy)
                 contours = [x.reshape((len(x), 2)) for x in contours]
                 for polygon, h in zip(contours, hierarchy[0]):
                     if 0 > h[3]:

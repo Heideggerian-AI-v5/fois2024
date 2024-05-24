@@ -5,8 +5,10 @@ import numpy
 import threading
 import time
 
+import inflection
+
 from constants import imgWidth, imgHeight, segmentationDilationRadius
-from constants import feature_params, lk_params, opticalFlowColor, contactColor, FOVdeg, FOVrad, halfH, f, APPROACHVELOCITY, DEPARTUREVELOCITY, typeMap
+from constants import feature_params, lk_params, opticalFlowColor, contactColor, FOVdeg, FOVrad, halfH, f, APPROACHVELOCITY, DEPARTUREVELOCITY
 from objectrecognition import imageReady, recognitionResultsLock, objectRecognitionResults
 from objectrecognition import startReceptionThread, stopReceptionThread, startRecognitionThread, stopRecognitionThread
 from dbgvis import startVisualizationThread, stopVisualizationThread, debugDataLock, debugData
@@ -22,7 +24,7 @@ perceptionGVar= {}
 
 def remapResultNames(resultDicts):
     def _remap(x):
-        x["type"] = typeMap.get(x["type"])
+        x["type"] = inflection.camelize(x["type"])
         return x
     return [_remap(e) for e in resultDicts]
 

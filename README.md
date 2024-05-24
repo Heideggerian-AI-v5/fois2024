@@ -17,6 +17,14 @@ For more detailed instructions on how to install pybullet on Windows, see:
 
 [https://deepakjogi.medium.com/how-to-install-pybullet-physics-simulation-in-windows-e1f16baa26f6](https://deepakjogi.medium.com/how-to-install-pybullet-physics-simulation-in-windows-e1f16baa26f6)
 
+Another package that seems to be a problem sometimes is websockets; this is listed as a dependency in requirements.txt, but there is a good chance you have it. There is also a good chance you have an older version, and this will trigger an import error for websockets.sync later on when you will try the runTurtle.py script. If this happens, running
+
+`
+    pip install --upgrade websockets
+`
+
+should fix it.
+
 ***Building shared library for contact mask calculation***
 
 Once all dependencies are installed, you can try building our contact.cpp file into a shared library. Assuming the cmake command is available on your system, it is enough to change to the turtle_sim folder of the repository and perform the following sequence of commands:
@@ -44,10 +52,12 @@ As you drive, the robot will "pay attention" to the incoming visual data, lookin
 To run this part of the experiment, you will need two command shells. In the first one, go to the repository clone directory and run
 
 `
-    python runTurtle.py -g -l supportScene.json  
+    python runTurtle.py -o -g -l turtle_sim/supportScene.json  
 `
 
 This will start up a simulated world with a turtlebot and some objects. You can drive the turtlebot using the arrow keys.
+
+(NOTE: on some systems the -o option will cause a crash, perhaps because the local openGL is not of an adequate version. Unfortunately, in this case running the experiments will not work. YOLO, the object detector, was trained on graphics rendered via openGL, and will fail on objects rendered by pybullet's CPU renderer.)
 
 Then in the second command shell go to the turtle_sim folder of the cloned repository and run:
 
@@ -86,7 +96,7 @@ This will assume default locations for training data (../data/raw/) and location
 You will need two command shells, like in part I. In the first shell, go to the repository clone directory and run:
 
 `
-    python runTurtle.py -g -l supportTestScene.json  
+    python runTurtle.py -o -g -l supportTestScene.json  
 `
 
 This is a similar scene to the first, but the objects are not hanging on hooks anymore.

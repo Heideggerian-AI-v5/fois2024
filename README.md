@@ -23,9 +23,13 @@ Once all dependencies are installed, you can try building our contact.cpp file i
 
 `
     mkdir build  
+    
     cd build  
+    
     cmake ..  
+    
     cmake --build .  
+    
     cp libcontact.* ..  
 `
 

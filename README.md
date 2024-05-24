@@ -67,7 +67,7 @@ This will assume default locations for training data (../data/raw/) and location
 
 python partII_trainYOLO.py -i <path/to/your/image/storage/location> -m <path/to/your/model>
 
-**Running agent with a pretrained object detection model**
+**Part III: Recognizing functional parts**
 
 You will need two command shells, like in part I. In the first shell, go to the repository clone directory and run:
 

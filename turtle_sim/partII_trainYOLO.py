@@ -3,7 +3,10 @@ import os
 import random
 import shutil
 
-from constants import rawImgDataFolder, yoloImgFolder, modelSObjsPath
+import ultralytics
+
+from pathlib import Path
+from constants import rawImgDataFolder, yoloImgDataFolder, modelSObjsPath
 
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 cwdFolder = os.getcwd()
@@ -21,22 +24,25 @@ def main():
     inputDirectory = rawImgDataFolder
     if "" != arguments.inputDirectory:
         inputDirectory = arguments.inputDirectory
-    outputDirectory = yoloImgFolder
+    outputDirectory = yoloImgDataFolder
     if "" != arguments.outputDirectory:
         outputDirectory = arguments.outputDirectory
+    runsFolder = os.path.join(outputDirectory,"runs")
     trainFolder = os.path.join(outputDirectory,"train")
     validFolder = os.path.join(outputDirectory,"valid")
     testFolder = os.path.join(outputDirectory,"test")
     str2IntMap = {}
     try:
-        os.mkdir(outputDirectory)
+        Path(outputDirectory).mkdir(parents=True, exist_ok=False)
     except FileExistsError:
         try:
+            shutil.rmtree(runsFolder)
             shutil.rmtree(trainFolder)
             shutil.rmtree(validFolder)
             shutil.rmtree(testFolder)
         except Exception as e:
             pass
+    os.mkdir(runsFolder)
     for e in [trainFolder, validFolder, testFolder]:
         os.mkdir(e)
         os.mkdir(os.path.join(e,"images"))
@@ -75,7 +81,7 @@ def main():
             poly = l[sp+1:]
             if otype not in str2IntMap:
                 str2IntMap[otype] = len(str2IntMap)
-            nl = str2IntMap[otype] + " " + poly
+            nl = str(str2IntMap[otype]) + " " + poly
             linesN.append(nl)
         txt = "\n".join(linesN)
         with open(os.path.join(outputDirectory,labelsFile), "w") as outfile:
@@ -87,8 +93,8 @@ def main():
         _ = outfile.write("names: %s\n\n" % str([x[1] for x in sorted([(v,k) for k,v in str2IntMap.items()])]))
         _ = outfile.write("roboflow:\n  workspace: none\n  project: yolo\n  version: 1\n  license: CC BY 4.0\n  url: none\n")
     model = ultralytics.YOLO('yolov8s-seg.pt')
-    results = model.train(data=yamlFile, batch=int(arguments.batch), epochs=int(arguments.epochs), imgsz=int(arguments.imageSize), patience=int(arguments.patience))
-    modelSrcFile = os.path.join(outputDirectory, "runs/segment/train/weights/best.pt")
+    results = model.train(data=yamlFile, project=os.path.join(outputDirectory, "runs"), batch=int(arguments.batch), epochs=int(arguments.epochs), imgsz=int(arguments.imageSize), patience=int(arguments.patience))
+    modelSrcFile = os.path.join(outputDirectory, "runs/train/weights/best.pt")
     modelDestFile = modelSObjsPath
     if "" != arguments.model:
         modelDestFile = arguments.model

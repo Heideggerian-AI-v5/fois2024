@@ -1,9 +1,9 @@
 # fois2024
 Code associated to a FOIS 2024 conference submission
 
-** Getting started**
+**Getting started**
 
-*** Installing dependencies ***
+***Installing dependencies***
 
 Git clone this repository then open a command shell and change to the repository clone directory. Once there, run
 
@@ -15,7 +15,7 @@ For more detailed instructions on how to install pybullet on Windows, see:
 
 [https://deepakjogi.medium.com/how-to-install-pybullet-physics-simulation-in-windows-e1f16baa26f6](https://deepakjogi.medium.com/how-to-install-pybullet-physics-simulation-in-windows-e1f16baa26f6)
 
-*** Building shared library for contact mask calculation***
+***Building shared library for contact mask calculation***
 
 Once all dependencies are installed, you can try building our contact.cpp file into a shared library. Assuming the cmake command is available on your system, it is enough to change to the turtle_sim folder of the repository and perform the following sequence of commands:
 
@@ -53,7 +53,7 @@ python partI_collectData.py -dest <path/to/your/storage/location>
 
 The robot will only store "relevant" frames, i.e. frames where it sees something it believes is an instance of a support relation.
 
-**Part 2: Training a YOLO object detection model **
+**Part 2: Training a YOLO object detection model**
 
 (Note: we include a pretrained model for functional parts in the repository, so you can also skip to part 3.)
 
